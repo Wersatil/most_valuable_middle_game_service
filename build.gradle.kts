@@ -1,12 +1,91 @@
 plugins {
 	java
-	id("org.springframework.boot") version "4.0.1"
+	id("org.springframework.boot") version "3.1.4"
 	id("io.spring.dependency-management") version "1.1.7"
 }
 
-group = "most_valuable_middle"
+group = "website_name"
 version = "0.0.1-SNAPSHOT"
 description = "Demo project for Spring Boot"
+
+configurations {
+	compileOnly {
+		extendsFrom(configurations.annotationProcessor.get())
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	/**
+	 * Spring boot starters
+	 */
+	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-data-redis")
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+	implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.0.2")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
+	/**
+	 * Database
+	 */
+	implementation("org.liquibase:liquibase-core")
+	implementation("redis.clients:jedis:4.3.2")
+	runtimeOnly("org.postgresql:postgresql")
+
+	/**
+	 * Amazon S3
+	 */
+	implementation("com.amazonaws:aws-java-sdk-s3:1.12.464")
+
+	/**
+	 * Utils & Logging
+	 */
+
+	implementation("org.springdoc", "springdoc-openapi-starter-webmvc-ui", "2.6.0")
+	implementation("com.fasterxml.jackson.core:jackson-databind:2.14.2")
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+	implementation("org.slf4j:slf4j-api:2.0.5")
+	implementation("org.projectlombok:lombok:1.18.32")
+	annotationProcessor("org.projectlombok:lombok:1.18.32")
+	implementation("org.mapstruct:mapstruct:1.5.3.Final")
+	annotationProcessor("org.mapstruct:mapstruct-processor:1.5.3.Final")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
+	implementation("org.springframework.kafka:spring-kafka")
+	implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.13.0")
+
+	/**
+	 * Test containers
+	 */
+	implementation(platform("org.testcontainers:testcontainers-bom:1.17.6"))
+	testImplementation("org.testcontainers:junit-jupiter")
+	testImplementation("org.testcontainers:postgresql")
+	testImplementation("com.redis.testcontainers:testcontainers-redis-junit-jupiter:1.4.6")
+	testImplementation("org.testcontainers:minio:1.19.5")
+
+	/**
+	 * Tests
+	 */
+	testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.2")
+	testImplementation("org.assertj:assertj-core:3.24.2")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+tasks.withType<Test> {
+	useJUnitPlatform()
+}
+
+val test by tasks.getting(Test::class) { testLogging.showStandardStreams = true }
+
+tasks.bootJar {
+	archiveFileName.set("service.jar")
+}
 
 java {
 	toolchain {
@@ -16,12 +95,6 @@ java {
 
 repositories {
 	mavenCentral()
-}
-
-dependencies {
-	implementation("org.springframework.boot:spring-boot-starter")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.withType<Test> {

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<title>Самый ценный мидл</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="TheQuest Gaming Magazine Template">
+	<meta name="keywords" content="gaming, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Favicon -->
+	<link href="../static/img/favicon.ico" rel="shortcut icon"/>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"/>
+	<link rel="stylesheet" th:href="@{/css/magnific-popup.css}"/>
+	<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}"/>
+	<link rel="stylesheet" th:href="@{/css/slicknav.min.css}"/>
+
+	<!-- Main Stylesheets -->
+	<link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header section -->
+	<header class="header-section">
+		<a th:href="index.html">
+			<img th:src="@{/img/logo.jpg}" alt="logo" style="max-height: 70px; width: auto;">
+		</a>
+		<div class="site-title">Самый ценный мидл</div>
+		<!--
+		<ul class="main-menu">
+			<li><a href="index.html">Home</a></li>
+			
+			<li><a href="characters.html">Characters</a></li>
+			<li><a href="game.html">Games</a></li>
+			<li><a href="reviews.html">Reviews</a></li>
+			<li><a href="news.html">News</a></li>
+			<li><a href="single-post.html">Page</a></li>
+		</ul>
+		-->
+		<div class="header-add">
+			<img th:src="@{/img/add.jpg}" alt="">
+		</div>
+	</header>
+	
+	<!-- Header section end -->
+
+	<!-- Page top section -->
+	<!--
+	<section class="page-top-section set-bg" data-setbg="img/header-bg/1.jpg">
+		<div class="container">
+			<h2>Самый ценный мидл</h2>
+		</div>
+	</section>
+	-->
+	<!-- Page top section end -->
+
+	<!-- Blog section -->
+	<section class="blog-section spad">
+		<div class="container">
+			<div class="row">
+				<div class="mx-auto">
+					<div class="blog-post single-post">
+						<div class="comments text-center">
+							<h5>Имена игроков</h5>
+							<form th:action="@{/api/v1/questions/game-start}" method="get" class="comment-form">
+								<div class="row">
+									<div class="col-md-4">
+										<input type="text" name="playerNames" placeholder="Имя игрока 1">
+									</div>
+									<div class="col-md-4">
+										<input type="text" name="playerNames" placeholder="Имя игрока 2">
+									</div>
+									<div class="col-md-4">
+										<input type="text" name="playerNames" placeholder="Имя игрока 3">
+									</div>
+									<div class="col-md-4">
+										<input type="text" name="playerNames" placeholder="Имя игрока 4">
+									</div>
+									<div class="col-md-4">
+										<input type="text" name="playerNames" placeholder="Имя игрока 5">
+									</div>
+									<div class="col-md-4">
+										<input type="text" name="playerNames" placeholder="Имя игрока 6">
+									</div>
+									<div class="col-md-4">
+										<input type="text" name="playerNames" placeholder="Имя игрока 7">
+									</div>
+									<div class="col-md-4">
+										<input type="text" name="playerNames" placeholder="Имя игрока 8">
+									</div>
+									<div class="col-md-4">
+										<input type="text" name="playerNames" placeholder="Имя игрока 9">
+									</div>
+								</div>
+								<div style="text-align: center;">
+									<div class="col-md-12 text-center">
+										<button type="submit" class="site-btn">Начать</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Blog section end -->
+
+	<!-- Footer section -->
+	<div class="footer-section">
+		<div class="container">
+			<div class="row">
+				<!--
+				<div class="footer-widget">
+					<p>1. За полный правильный ответ игрок получает 3 балла.</p>
+					<p>2. За 50% ответа игрок получает 1 балл.</p>
+					<p>3. Если игрок дает менее 50% ответа, он не получает баллов, и ответить на вопрос получает право один другой игрок (приоритет получают те, у кого меньше баллов). </p>
+					<p>4. За полный ответ вне своей очереди игрок получает 2 балла, за неполный ответ не получает ничего.</p>
+					<p></p>
+				</div>
+				-->
+			</div>
+			<div class="copyright"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+	<!--Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>-->
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
+		</div>
+		<div class="social-links-warp">
+			<div class="container">
+				<div class="social-links">
+					<a href="#"><i class="fa fa-instagram"></i><span>instagram</span></a>
+					<a href="#"><i class="fa fa-pinterest"></i><span>pinterest</span></a>
+					<a href="#"><i class="fa fa-facebook"></i><span>facebook</span></a>
+					<a href="#"><i class="fa fa-twitter"></i><span>twitter</span></a>
+					<a href="#"><i class="fa fa-youtube"></i><span>youtube</span></a>
+					<a href="#"><i class="fa fa-tumblr-square"></i><span>tumblr</span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer section end -->
+
+	<!--====== Javascripts & Jquery ======-->
+	<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/jquery.slicknav.js}"></script>
+	<script th:src="@{/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/js/circle-progress.min.js}"></script>
+	<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+
+	</body>
+</html>
