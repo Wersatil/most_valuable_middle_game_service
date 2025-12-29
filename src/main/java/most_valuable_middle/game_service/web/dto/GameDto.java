@@ -13,6 +13,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GameDto {
+
+
+    //По новой модели теперь ответ не скрывается. Один и тот же всегда висит на экране
+
+    //И имя тоже, почему-то не отображается
+
+
     private Long id;
     private Integer queuePosition;
     private Integer questionId;

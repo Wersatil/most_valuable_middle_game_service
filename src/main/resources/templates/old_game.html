@@ -6,7 +6,7 @@
 	<meta name="description" content="TheQuest Gaming Magazine Template">
 	<meta name="keywords" content="gaming, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
+
 	<!-- Favicon -->
 	<link href="../static/img/favicon.ico" rel="shortcut icon"/>
 
@@ -35,78 +35,60 @@
 			<img th:src="@{/img/logo.jpg}" alt="logo" style="max-height: 70px; width: auto;">
 		</a>
 		<div class="site-title">Самый ценный мидл</div>
-		<!--
-		<ul class="main-menu">
-			<li><a href="index.html">Home</a></li>
-			
-			<li><a href="characters.html">Characters</a></li>
-			<li><a href="old_game.html">Games</a></li>
-			<li><a href="reviews.html">Reviews</a></li>
-			<li><a href="news.html">News</a></li>
-			<li><a href="single-post.html">Page</a></li>
-		</ul>
-		-->
 		<div class="header-add">
 			<img th:src="@{/img/add.jpg}" alt="">
 		</div>
 	</header>
-	
 	<!-- Header section end -->
-
-	<!-- Page top section -->
-	<!--
-	<section class="page-top-section set-bg" data-setbg="img/header-bg/1.jpg">
-		<div class="container">
-			<h2>Самый ценный мидл</h2>
-		</div>
-	</section>
-	-->
-	<!-- Page top section end -->
 
 	<!-- Blog section -->
 	<section class="blog-section spad">
 		<div class="container">
 			<div class="row">
-				<div class="mx-auto">
+				<div class="col-lg-8">
 					<div class="blog-post single-post">
-						<div class="comments text-center">
-							<h5>Имена игроков</h5>
-							<form th:action="@{/api/v1/questions/game-start}" method="get" class="comment-form">
-								<div class="row">
-									<div class="col-md-4">
-										<input type="text" name="playerNames" placeholder="Имя игрока 1">
+						<div class="comments">
+							<ul class="comments-list">
+								<li>
+									<img th:src="${currentPlayer.getAvatar()}" alt="">
+									<div class="comment-text">
+										<h6><span th:text="${currentPlayer.name}"></span></h6>
+										<div class="question-text">
+											<h5>
+												<span th:text="${game.getQuestionId()}"></span>
+												<span>. </span>
+												<span th:text="${game.getQuestion()}"></span>
+											</h5>
+										</div>
+										<div class="score-buttons">
+											<a th:href = "@{/api/v2/questions/next/{player}/{game}/{scores}(player=${currentPlayer.getId()}, game=${game.getId()}, scores=3)}"><button class="scores-btn" onclick="nextQuestion(1)">1</button></a>
+											<a th:href = "@{/api/v2/questions/next/{player}/{game}/{scores}(player=${currentPlayer.getId()}, game=${game.getId()}, scores=1)}"><button class="scores-btn" onclick="nextQuestion(2)">2</button></a>
+											<a th:href = "@{/api/v2/questions/next/{player}/{game}/{scores}(player=${currentPlayer.getId()}, game=${game.getId()}, scores=0)}"><button class="scores-btn" onclick="nextQuestion(3)">3</button></a>
+											<button class="answer-btn" onclick="showAnswer()">Ответ ИИ</button>
+										</div>
 									</div>
-									<div class="col-md-4">
-										<input type="text" name="playerNames" placeholder="Имя игрока 2">
+								</li>
+								<li>
+									<div class="comment-text">
+										<p id="answer" style="display:none;"></p>
 									</div>
-									<div class="col-md-4">
-										<input type="text" name="playerNames" placeholder="Имя игрока 3">
-									</div>
-									<div class="col-md-4">
-										<input type="text" name="playerNames" placeholder="Имя игрока 4">
-									</div>
-									<div class="col-md-4">
-										<input type="text" name="playerNames" placeholder="Имя игрока 5">
-									</div>
-									<div class="col-md-4">
-										<input type="text" name="playerNames" placeholder="Имя игрока 6">
-									</div>
-									<div class="col-md-4">
-										<input type="text" name="playerNames" placeholder="Имя игрока 7">
-									</div>
-									<div class="col-md-4">
-										<input type="text" name="playerNames" placeholder="Имя игрока 8">
-									</div>
-									<div class="col-md-4">
-										<input type="text" name="playerNames" placeholder="Имя игрока 9">
-									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 sidebar">
+					<div class="sb-widget">
+						<h2 class="sb-title">Игроки</h2>
+						<div class="latest-comments-widget">
+							<div class="lc-item" th:each = "player : ${game.getPlayers()}">
+								<img th:src="${player.getAvatar()}" alt="">
+								<div class="lc-text">
+									<h5><span th:text="${player.getName()}"></span></h5>
+									<h6>Заслуживает ЗП: <span th:text="${player.getOfferSum()}"></span> руб</h6>
 								</div>
-								<div style="text-align: center;">
-									<div class="col-md-12 text-center">
-										<button type="submit" class="site-btn">Начать</button>
-									</div>
-								</div>
-							</form>
+								<a th:href = "@{/api/v2/questions/next/{player}/{game}/{scores}(player=${player.getId()}, game=${game.getId()}, scores=2)}"><button type="submit" class="scores-btn">2</button></a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -119,7 +101,6 @@
 	<div class="footer-section">
 		<div class="container">
 			<div class="row">
-				<!--
 				<div class="footer-widget">
 					<p>1. За полный правильный ответ игрок получает 3 балла.</p>
 					<p>2. За 50% ответа игрок получает 1 балл.</p>
@@ -127,7 +108,6 @@
 					<p>4. За полный ответ вне своей очереди игрок получает 2 балла, за неполный ответ не получает ничего.</p>
 					<p></p>
 				</div>
-				-->
 			</div>
 			<div class="copyright"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 	<!--Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>-->
@@ -157,5 +137,42 @@
 	<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
 	<script th:src="@{/js/main.js}"></script>
 
+	<script th:inline="javascript">
+		const message = /*[[${game.answer}]]*/ "";
+	</script>
+
+	<script>
+		function showAnswer() {
+			document.getElementById("answer").innerText = message;
+			document.getElementById("answer").style.display = "block";
+		}
+	</script>
+
+	<script th:inline="javascript">
+		const currentPlayerId = /*[[${currentPlayer.id}]]*/ 0;
+		const gameId = /*[[${game.id}]]*/ 0;
+	</script>
+
+	<script>
+		async function nextQuestion(scores) {
+			const response = await fetch(
+					`/api/v2/questions/next/${currentPlayerId}/${gameId}/${scores}`
+			);
+			const game = await response.json();
+			updateUI(game);
+		}
+	</script>
+	<script>
+		function updateUI(game) {
+			document.getElementById("playerName").innerText = game.currentPlayer.name;
+			document.getElementById("playerAvatar").src = game.currentPlayer.avatar;
+			document.getElementById("questionText").innerText = game.question;
+			game.players.forEach(p => {
+				document.getElementById(`offer-${p.id}`).innerText = p.offerSum;
+			});
+		}
+	</script>
+
 	</body>
 </html>
+

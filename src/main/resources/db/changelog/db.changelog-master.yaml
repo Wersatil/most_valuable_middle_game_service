@@ -1,10 +1,10 @@
 databaseChangeLog:
   - include:
       file: db/changelog/changeset/question_V001__initial.sql
-  - include:
-      file: db/changelog/changeset/question_taras_V002_insert_questions_java_core_base.sql
-  - include:
-      file: db/changelog/changeset/question_taras_V003_insert_questions_java_core_OOP.sql
+#  - include:
+#      file: db/changelog/changeset/question_taras_V002_insert_questions_java_core_base.sql
+#  - include:
+#      file: db/changelog/changeset/question_taras_V003_insert_questions_java_core_OOP.sql
   - include:
       file: db/changelog/changeset/question_taras_V004_insert_questions_java_core_collections.sql
   - include:
