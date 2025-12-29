@@ -816,8 +816,8 @@ Header section
 
 .latest-comments-widget .lc-item img {
 	float: left;
-	width: 55px;
-	height: 55px;
+	width: 70px;
+	height: 70px;
 	border-radius: 50%;
 	margin-right: 24px;
 }
@@ -1191,9 +1191,21 @@ Single Post page
 	overflow: hidden;
 }
 
+/*
+.comments-list .comment-text span {
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 700;
+	padding: 1px 5px;
+	margin-bottom: 10px;
+	background: #10ddb4;
+}
+*/
+
 .comments-list .comment-text h6 {
 	color: #10ddb4;
-	font-weight: 500;
+	font-size: 21px;
+	font-weight: 700;
 	margin-bottom: 5px;
 }
 
