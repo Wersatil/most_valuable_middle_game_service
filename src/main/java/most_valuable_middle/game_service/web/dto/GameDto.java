@@ -1,25 +1,22 @@
-package most_valuable_middle.game_service.persistence.redis.model;
+package most_valuable_middle.game_service.web.dto;
 
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import most_valuable_middle.game_service.domain.model.Player;
-import most_valuable_middle.game_service.persistence.jpa.entity.Question;
-import org.springframework.data.redis.core.RedisHash;
 
 import java.util.List;
 
-@RedisHash("game")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GameModel {
-
-    @Id
+public class GameDto {
     private Long id;
     private Integer queuePosition;
+    private Integer questionId;
+    private String question;
+    private String answer;
     private List<Player> players;
 }

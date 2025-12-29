@@ -3,13 +3,15 @@ package most_valuable_middle.game_service.application.service.game;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import most_valuable_middle.game_service.application.mapper.GameMapper;
 import most_valuable_middle.game_service.persistence.jpa.entity.Game;
-import most_valuable_middle.game_service.persistence.jpa.entity.Player;
+import most_valuable_middle.game_service.domain.model.Player;
 import most_valuable_middle.game_service.persistence.jpa.entity.Question;
 import most_valuable_middle.game_service.persistence.jpa.repository.JpaGameRepository;
 import most_valuable_middle.game_service.persistence.jpa.repository.JpaQuestionRepository;
 import most_valuable_middle.game_service.persistence.redis.model.GameModel;
 import most_valuable_middle.game_service.persistence.redis.repository.RedisGameRepository;
+import most_valuable_middle.game_service.web.dto.GameDto;
 import most_valuable_middle.game_service.web.exception.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -31,6 +33,7 @@ public class GameServiceImpl implements GameService {
     private final JpaQuestionRepository jpaQuestionRepository;
     private final RedisGameRepository redisGameRepository;
     private final JpaGameRepository jpaGameRepository;
+    private final GameMapper gameMapper;
 
     @Value("${avatars}")
     private List<String> avatars;
@@ -38,44 +41,52 @@ public class GameServiceImpl implements GameService {
     @Value("${score.price_in_rubles}")
     private int scoreInRubles;
 
-    private Queue<Integer> questionIds = new ArrayDeque<>();
+    private Queue<Question> questions = new ArrayDeque<>();
 
     @PostConstruct
     public void fillQuestionList() {
-        List<Integer> ids = jpaQuestionRepository.getAllIds();
-        Collections.shuffle(ids);
-        questionIds.addAll(ids);
+        List<Question> questionListFromDb = jpaQuestionRepository.findAll();
+        //Collections.shuffle(questionListFromDb);
+        questions.addAll(questionListFromDb);
     }
 
     @Override
-    public GameModel startGame(List<String> playerNames) {
+    public GameDto startGame(List<String> playerNames) {
         Game game = jpaGameRepository.save(new Game());
+        Question randomQuestion = getRandomQuestion();
         GameModel gameModel = new GameModel(
                 game.getId(),
                 START_QUEUE_POSITION,
-                getRandomQuestion(),
                 createPlayers(playerNames)
                 );
         redisGameRepository.save(gameModel);
-        return gameModel;
+        GameDto gameDto = gameMapper.toGameDto(gameModel);
+        gameDto.setQuestionId(randomQuestion.getId());
+        gameDto.setQuestion(randomQuestion.getQuestionText());
+        gameDto.setAnswer(randomQuestion.getAnswer());
+        return gameDto;
     }
 
     @Override
-    public GameModel moveToNextQuestion(int playerId, int scores, long gameId) {
+    public GameDto moveToNextQuestion(int playerId, int scores, long gameId) {
         GameModel game = redisGameRepository.findById(gameId)
                 .orElseThrow(() -> new EntityNotFoundException("К сожалению, время игры истекло."));
         if (scores != 0) {
             addScores(playerId, scores, game);
         }
-        game.setQuestion(getRandomQuestion());
+        Question randomQuestion = getRandomQuestion();
         game.setQueuePosition(moveQueuePosition(game.getQueuePosition(), game.getPlayers().size()));
         redisGameRepository.save(game);
-        return game;
+        GameDto gameDto = gameMapper.toGameDto(game);
+        gameDto.setQuestionId(randomQuestion.getId());
+        gameDto.setQuestion(randomQuestion.getQuestionText());
+        gameDto.setAnswer(randomQuestion.getAnswer());
+        return gameDto;
     }
 
     private Question getRandomQuestion() {
-        Integer nextQuestionId = questionIds.poll();
-        if (nextQuestionId == null) {
+        Question randomQuestion = questions.poll();
+        if (randomQuestion == null) {
             Question emptyQuestionEntity = new Question();
             emptyQuestionEntity.setQuestionText(
                     "Поздравляем, вы прошли все вопросы! Для начала новой игры перезапустите сервер");
@@ -83,7 +94,7 @@ public class GameServiceImpl implements GameService {
                     "Есть вероятность, что вопросы уже закончились, а ответы на них - еще нет? )");
             return emptyQuestionEntity;
         }
-        return jpaQuestionRepository.findById(nextQuestionId).get();
+        return randomQuestion;
     }
 
     private void addScores(int playerId, int scores, GameModel game) {
