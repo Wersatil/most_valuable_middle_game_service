@@ -50,20 +50,20 @@
 						<div class="comments">
 							<ul class="comments-list">
 								<li>
-									<img th:src="${game.getPlayers().get(game.getQueuePosition()).getAvatar()}" alt="">
+									<img th:src="${currentPlayer.getAvatar()}" alt="">
 									<div class="comment-text">
-										<h6><span th:text="${game.getPlayers().get(game.getQueuePosition()).name}"></span></h6>
+										<h6><span th:text="${currentPlayer.name}"></span></h6>
 										<div class="question-text">
 											<h5>
-												<span th:text="${game.getQuestion().getId()}"></span>
+												<span th:text="${game.getQuestionId()}"></span>
 												<span>. </span>
-												<span th:text="${game.getQuestion().getQuestionText()}"></span>
+												<span th:text="${game.getQuestion()}"></span>
 											</h5>
 										</div>
 										<div class="score-buttons">
-											<a th:href = "@{/api/v1/questions/next/{player}/{game}/{scores}(player=${game.getPlayers().get(game.getQueuePosition()).getId()}, game=${game.getId()}, scores=3)}"><button type="submit" class="scores-btn">3</button></a>
-											<a th:href = "@{/api/v1/questions/next/{player}/{game}/{scores}(player=${game.getPlayers().get(game.getQueuePosition()).getId()}, game=${game.getId()}, scores=1)}"><button type="submit" class="scores-btn">1</button></a>
-											<a th:href = "@{/api/v1/questions/next/{player}/{game}/{scores}(player=${game.getPlayers().get(game.getQueuePosition()).getId()}, game=${game.getId()}, scores=0)}"><button type="submit" class="scores-btn">0</button></a>
+											<a th:href = "@{/api/v1/questions/next/{player}/{game}/{scores}(player=${currentPlayer.getId()}, game=${game.getId()}, scores=3)}"><button type="submit" class="scores-btn">3</button></a>
+											<a th:href = "@{/api/v1/questions/next/{player}/{game}/{scores}(player=${currentPlayer.getId()}, game=${game.getId()}, scores=1)}"><button type="submit" class="scores-btn">1</button></a>
+											<a th:href = "@{/api/v1/questions/next/{player}/{game}/{scores}(player=${currentPlayer.getId()}, game=${game.getId()}, scores=0)}"><button type="submit" class="scores-btn">0</button></a>
 											<button class="answer-btn" onclick="showAnswer()">Ответ ИИ</button>
 										</div>
 									</div>
@@ -82,10 +82,10 @@
 						<h2 class="sb-title">Игроки</h2>
 						<div class="latest-comments-widget">
 							<div class="lc-item" th:each = "player : ${game.getPlayers()}">
-								<img th:src="${player.avatar}" alt="">
+								<img th:src="${player.getAvatar()}" alt="">
 								<div class="lc-text">
-									<h5><span th:text="${player.name}"></span></h5>
-									<h6>Заслуживает ЗП: <span th:text="${player.offerSum}"></span> руб</h6>
+									<h5><span th:text="${player.getName()}"></span></h5>
+									<h6>Заслуживает ЗП: <span th:text="${player.getOfferSum()}"></span> руб</h6>
 								</div>
 								<a th:href = "@{/api/v1/questions/next/{player}/{game}/{scores}(player=${player.getId()}, game=${game.getId()}, scores=2)}"><button type="submit" class="scores-btn">2</button></a>
 							</div>
@@ -138,7 +138,7 @@
 	<script th:src="@{/js/main.js}"></script>
 
 	<script th:inline="javascript">
-		const message = /*[[${game.question.answer}]]*/ "";
+		const message = /*[[${game.answer}]]*/ "";
 	</script>
 
 	<script>

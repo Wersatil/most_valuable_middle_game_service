@@ -1,4 +1,4 @@
-package most_valuable_middle.game_service.persistence.jpa.entity;
+package most_valuable_middle.game_service.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

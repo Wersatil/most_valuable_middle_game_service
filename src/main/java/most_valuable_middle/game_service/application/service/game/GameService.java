@@ -1,11 +1,11 @@
 package most_valuable_middle.game_service.application.service.game;
 
-import most_valuable_middle.game_service.persistence.redis.model.GameModel;
+import most_valuable_middle.game_service.web.dto.GameDto;
 
 import java.util.List;
 
 public interface GameService {
-    GameModel startGame(List<String> playerNames);
+    GameDto startGame(List<String> playerNames);
 
-    GameModel moveToNextQuestion(int playerId, int scores, long gameId);
+    GameDto moveToNextQuestion(int playerId, int scores, long gameId);
 }
