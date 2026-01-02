@@ -46,7 +46,7 @@ public class GameServiceImpl implements GameService {
     @PostConstruct
     public void fillQuestionList() {
         List<Question> questionListFromDb = jpaQuestionRepository.findAll();
-        //Collections.shuffle(questionListFromDb);
+        Collections.shuffle(questionListFromDb);
         questions.addAll(questionListFromDb);
     }
 
