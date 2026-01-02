@@ -29,4 +29,4 @@ logging:
     root: info
 
 score:
-  price_in_rubles: 3000
+  price_in_rubles: 4000
