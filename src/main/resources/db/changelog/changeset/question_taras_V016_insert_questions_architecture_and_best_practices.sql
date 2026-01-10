@@ -24,7 +24,7 @@ INSERT INTO question (question_text, answer, author) VALUES
     ('Что такое structured logging?', 'Логирование в формате JSON или с ключами для удобного анализа в ELK или Grafana.', 'Wersatil'),
     ('Что такое logging pattern?', 'Формат записи лога, например: %d{HH:mm:ss} %-5level %logger{36} - %msg%n', 'Wersatil'),
     ('Что делает @Mapper(componentModel = "spring")?', 'Указывает MapStruct на то, что создавать бин Spring для внедрения через @Autowired.', 'Wersatil'),
-    ('Чем MapStruct отличается от ModelMapper?', 'MapStruct генерирует код на этапе компиляции, ModelMapper делает маппинг во время выполнения.', 'Wersatil'),
+    ('Чем MapStruct отличается от ModelMapper?', 'MapStruct генерирует код на этапе компиляции, благодаря этому быстрее и безопаснее работает и ошибки ловит уже на этапе компиляции (до начала работы). ModelMapper делает маппинг во время выполнения.', 'Wersatil'),
     ('Как обрабатывать ValidationException глобально?', 'Создать @ExceptionHandler(ValidationException.class) в @ControllerAdvice и вернуть ResponseEntity с ошибкой.', 'Wersatil'),
     ('Что такое ResponseStatusException?', 'Класс для выброса исключения с конкретным HTTP статусом в контроллере.', 'Wersatil'),
     ('Что такое error code в REST API?', 'Уникальный код ошибки для идентификации типа ошибки клиентом.', 'Wersatil'),

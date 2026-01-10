@@ -1,5 +1,5 @@
 INSERT INTO question (question_text, answer, author) VALUES
---    ('Что такое JVM?', 'JVM (Java Virtual Machine) — виртуальная машина, которая исполняет байткод Java и обеспечивает независимость от платформы.', 'Wersatil'),
+    ('Что такое JVM?', 'JVM (Java Virtual Machine) — виртуальная машина, которая исполняет байткод Java и обеспечивает независимость от платформы.', 'Wersatil'),
     ('Что такое JRE?', 'JRE (Java Runtime Environment) — среда выполнения Java, включающая JVM и стандартные библиотеки.', 'Wersatil'),
     ('Что такое JDK?', 'JDK (Java Development Kit) — набор инструментов для разработки Java-приложений, включает JRE и компилятор.', 'Wersatil'),
     ('Чем отличается JDK от JRE?', 'JDK предназначен для разработки и содержит инструменты, JRE — только для запуска приложений.', 'Wersatil'),
