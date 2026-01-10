@@ -41,3 +41,7 @@ databaseChangeLog:
       file: db/changelog/changeset/question_elya_V020_insert_question_spring.sql
   - include:
       file: db/changelog/changeset/game_V021_initial.sql
+  - include:
+      file: db/changelog/changeset/question_taras_V022_insert_questions_my_own_questions.sql
+  - include:
+      file: db/changelog/changeset/question_taras_V023_insert_bootcamp_questions.sql

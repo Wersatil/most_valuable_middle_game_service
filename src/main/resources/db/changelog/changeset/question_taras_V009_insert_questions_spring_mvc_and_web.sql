@@ -1,8 +1,6 @@
 INSERT INTO question (question_text, answer, author) VALUES
     ('Чем @Controller отличается от @RestController?', '@RestController - это Комбинация @Controller и @ResponseBody, он автоматически сериализует все объекты в JSON / XML. В отличие от @Controller, который возвращает view.', 'Wersatil'),
     ('Чем отличается @RequestParam от @PathVariable?', '@RequestParam получает значения из query-параметров, @PathVariable — из пути URL. Плюс @RequestParam можно делать необязательным. PathVariable — это “кто/что” (идентификатор ресурса, одного ресурса), RequestParam — это “как/с какими условиями” (фильтрация, скорее всего тут будет список).', 'Wersatil'),
-    ('Пример использования @RequestParam?', '/users?age=25 — @RequestParam("age") int age', 'Wersatil'),
-    ('Пример использования @PathVariable?', '/users/5 — @PathVariable("id") Long id', 'Wersatil'),
     ('Что такое HTTP PATCH?', 'Метод запроса для частичного обновления ресурса.', 'Wersatil'),
     ('Какой статус возвращает успешный HTTP-запрос DELETE?', '204 No Content', 'Wersatil'),
     ('Что означает HTTP-статус 400?', 'Bad Request — некорректный запрос от клиента.', 'Wersatil'),
